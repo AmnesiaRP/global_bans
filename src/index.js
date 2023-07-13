@@ -55,26 +55,26 @@ app.use(function (req, res, next) {
     )
 });
 
-app.get('/users/:steamid', (req, res) => {
+app.get('/users/:steam_id', (req, res) => {
     db.query(
         'SELECT name as server, reason FROM bans INNER JOIN servers ON bans.server_id = servers.id WHERE steamid = ?',
-        [req.params.steamid],
+        [req.params.steam_id],
         (err, results) => {
             res.send({
-                steamid: req.params.steamid,
+                steam_id: req.params.steam_id,
                 bans: results,
             })
         }
     )
 })
 
-app.post('/users/:steamid/bans', (req, res) => {
+app.post('/users/:steam_id/bans', (req, res) => {
     db.query(
         'INSERT INTO bans (steamid, server_id, reason) VALUES (?, ?, ?)',
-        [req.params.steamid, req.auth.id, req.body.reason],
+        [req.params.steam_id, req.auth.id, req.body.reason],
         () => {
             res.send({
-                steamid: req.params.steamid,
+                steam_id: req.params.steam_id,
                 server: req.auth.name,
                 reason: req.body.reason,
             })
