@@ -1,4 +1,4 @@
-# REST API for GlobalBan project
+# REST API for GlobalBans project
 
 ## Installation
 
